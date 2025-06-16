@@ -170,7 +170,7 @@ class Config:
         if "/website/" in REQUEST_PATH:
             CONFIG_TYPE = "WEBSITE"
             if REQUEST_ORIGIN == "":
-                CONFIG_TYPE = "NEXT"
+                CONFIG_ENV = "NEXT"
             elif REQUEST_ORIGIN == CONFIG_DICT[CONFIG_TYPE]["MASTER"]["ORIGINS"]:
                 CONFIG_ENV = "MASTER"
             elif REQUEST_ORIGIN == CONFIG_DICT[CONFIG_TYPE]["NEXT"]["ORIGINS"]:
@@ -183,7 +183,7 @@ class Config:
         elif "/sharetwin/" in REQUEST_PATH:
             CONFIG_TYPE = "SHARETWIN"
             if REQUEST_ORIGIN == "":
-                CONFIG_TYPE = "NEXT"
+                CONFIG_ENV = "NEXT"
             elif REQUEST_ORIGIN == CONFIG_DICT[CONFIG_TYPE]["MASTER"]["ORIGINS"]:
                 CONFIG_ENV = "MASTER"
             elif REQUEST_ORIGIN == CONFIG_DICT[CONFIG_TYPE]["NEXT"]["ORIGINS"]:
@@ -191,7 +191,7 @@ class Config:
         elif "/vease/" in REQUEST_PATH:
             CONFIG_TYPE = "VEASE"
             if REQUEST_ORIGIN == "":
-                CONFIG_TYPE = "NEXT"
+                CONFIG_ENV = "NEXT"
             elif REQUEST_ORIGIN == CONFIG_DICT[CONFIG_TYPE]["MASTER"]["ORIGINS"]:
                 CONFIG_ENV = "MASTER"
             elif REQUEST_ORIGIN == CONFIG_DICT[CONFIG_TYPE]["NEXT"]["ORIGINS"]:
