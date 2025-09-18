@@ -165,6 +165,46 @@ class Config:
                     "VPC_ID": "vpc-0e58c4d6976fb2aac",
                 },
             },
+            "PEGGHY": {
+                "MASTER": {
+                    "API_URL": "https://api.pegghy.geode-solutions.com",
+                    "ASSIGN_PUBLIC_IP": "ENABLED",
+                    "CLUSTER_NAME": "PEGGHy-Master",
+                    "ENVIRONMENT_VARIABLES": {
+                        "name": "geode",
+                        "environment": [{"name": "ID", "value": ID}],
+                    },
+                    "HEALTHCHECK_PORT": 443,
+                    "HEALTHCHECK_ROUTE": f"/{ID}/geode/pegghy_back/healthcheck",
+                    "LISTENER_ARN": "arn:aws:elasticloadbalancing:eu-west-3:622060531233:listener/app/PEGGHy/fd1a3cd691170720/94cb93fc08a8f221",
+                    "PING_ROUTE": f"/{ID}/geode/opengeodeweb_back/ping",
+                    "ORIGINS": "https://pegghy.geode-solutions.com",
+                    "SECONDS_BETWEEN_TRIES": 0.25,
+                    "SECURITY_GROUP": "sg-0352ea112857ae7b9",
+                    "SUBNET_ID": "subnet-0882d674b17515f6a",
+                    "TASK_DEF_NAME": "PEGGHy-Master",
+                    "VPC_ID": "vpc-0e58c4d6976fb2aac",
+                },
+                "NEXT": {
+                    "API_URL": "https://api.pegghy.geode-solutions.com",
+                    "ASSIGN_PUBLIC_IP": "ENABLED",
+                    "CLUSTER_NAME": "PEGGHy-Next",
+                    "ENVIRONMENT_VARIABLES": {
+                        "name": "geode",
+                        "environment": [{"name": "ID", "value": ID}],
+                    },
+                    "HEALTHCHECK_PORT": 443,
+                    "HEALTHCHECK_ROUTE": f"/{ID}/geode/pegghy_back/healthcheck",
+                    "LISTENER_ARN": "arn:aws:elasticloadbalancing:eu-west-3:622060531233:listener/app/PEGGHy/fd1a3cd691170720/94cb93fc08a8f221",
+                    "PING_ROUTE": f"/{ID}/geode/opengeodeweb_back/ping",
+                    "ORIGINS": "https://next.pegghy.geode-solutions.com",
+                    "SECONDS_BETWEEN_TRIES": 0.25,
+                    "SECURITY_GROUP": "sg-0352ea112857ae7b9",
+                    "SUBNET_ID": "subnet-0882d674b17515f6a",
+                    "TASK_DEF_NAME": "PEGGHy-Next",
+                    "VPC_ID": "vpc-0e58c4d6976fb2aac",
+                },
+            },
         }
 
         if "/website/" in REQUEST_PATH:
@@ -201,6 +241,14 @@ class Config:
                 task = REQUEST_ORIGIN[8:].split("--geode-solutions.netlify.app")[0]
                 CONFIG_DICT[CONFIG_TYPE][CONFIG_ENV]["ORIGINS"] = REQUEST_ORIGIN
                 CONFIG_DICT[CONFIG_TYPE][CONFIG_ENV]["TASK_DEF_NAME"] = task
+        elif "/pegghy/" in REQUEST_PATH:
+            CONFIG_TYPE = "PEGGHY"
+            if REQUEST_ORIGIN == "":
+                CONFIG_ENV = "NEXT"
+            elif REQUEST_ORIGIN == CONFIG_DICT[CONFIG_TYPE]["MASTER"]["ORIGINS"]:
+                CONFIG_ENV = "MASTER"
+            elif REQUEST_ORIGIN == CONFIG_DICT[CONFIG_TYPE]["NEXT"]["ORIGINS"]:
+                CONFIG_ENV = "NEXT"
 
         self.API_URL = CONFIG_DICT[CONFIG_TYPE][CONFIG_ENV]["API_URL"]
         self.ASSIGN_PUBLIC_IP = CONFIG_DICT[CONFIG_TYPE][CONFIG_ENV]["ASSIGN_PUBLIC_IP"]
