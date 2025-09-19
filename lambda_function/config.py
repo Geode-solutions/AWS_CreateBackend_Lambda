@@ -167,7 +167,7 @@ class Config:
             },
             "PEGGHY": {
                 "MASTER": {
-                    "API_URL": "https://api.pegghy.geode-solutions.com",
+                    "API_URL": "https://api_pegghy.geode-solutions.com",
                     "ASSIGN_PUBLIC_IP": "ENABLED",
                     "CLUSTER_NAME": "PEGGHy-Master",
                     "ENVIRONMENT_VARIABLES": {
@@ -186,7 +186,7 @@ class Config:
                     "VPC_ID": "vpc-0e58c4d6976fb2aac",
                 },
                 "NEXT": {
-                    "API_URL": "https://api.pegghy.geode-solutions.com",
+                    "API_URL": "https://api_pegghy.geode-solutions.com",
                     "ASSIGN_PUBLIC_IP": "ENABLED",
                     "CLUSTER_NAME": "PEGGHy-Next",
                     "ENVIRONMENT_VARIABLES": {
