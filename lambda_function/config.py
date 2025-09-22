@@ -200,7 +200,7 @@ class Config:
                     "ORIGINS": "https://next.pegghy.geode-solutions.com",
                     "SECONDS_BETWEEN_TRIES": 0.25,
                     "SECURITY_GROUP": "sg-02d7a875e41282ee8",
-                    "SUBNET_ID": "subnet-0c1e34ba953ea2012",
+                    "SUBNET_ID": "subnet-0c203934dc595d050",
                     "TASK_DEF_NAME": "PEGGHy-Next",
                     "VPC_ID": "vpc-0ae127376e8c4e8f4",
                 },
