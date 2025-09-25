@@ -199,7 +199,7 @@ class Config:
                     "PING_ROUTE": f"/{ID}/geode/opengeodeweb_back/ping",
                     "ORIGINS": "https://next.pegghy.geode-solutions.com",
                     "SECONDS_BETWEEN_TRIES": 0.25,
-                    "SECURITY_GROUP": "sg-0b95f2fc216b84db5",
+                    "SECURITY_GROUP": "sg-0a7acf0386920389f",
                     "SUBNET_ID": "subnet-0b1cdf95eef16b6cc",
                     "TASK_DEF_NAME": "PEGGHy-Next",
                     "VPC_ID": "vpc-0b6bc4c43a214f137",
