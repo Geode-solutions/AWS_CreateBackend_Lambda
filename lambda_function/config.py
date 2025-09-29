@@ -187,7 +187,7 @@ class Config:
                 },
                 "NEXT": {
                     "API_URL": "https://api_pegghy.geode-solutions.com",
-                    "ASSIGN_PUBLIC_IP": "DISABLED",
+                    "ASSIGN_PUBLIC_IP": "ENABLED",
                     "CLUSTER_NAME": "PEGGHy-Next",
                     "ENVIRONMENT_VARIABLES": {
                         "name": "geode",
@@ -195,14 +195,14 @@ class Config:
                     },
                     "HEALTHCHECK_PORT": 443,
                     "HEALTHCHECK_ROUTE": f"/{ID}/geode/pegghy_back/healthcheck",
-                    "LISTENER_ARN": "arn:aws:elasticloadbalancing:eu-west-3:622060531233:listener/app/PEGGHy/ae2d472148468ed0/be8ca0ad1f0d75c8",
+                    "LISTENER_ARN": "arn:aws:elasticloadbalancing:eu-west-3:622060531233:listener/app/PEGGHy/2bc668aa6572dc0d/11047782bcf22492",
                     "PING_ROUTE": f"/{ID}/geode/opengeodeweb_back/ping",
                     "ORIGINS": "https://next.pegghy.geode-solutions.com",
                     "SECONDS_BETWEEN_TRIES": 0.25,
-                    "SECURITY_GROUP": "sg-0a7acf0386920389f",
-                    "SUBNET_ID": "subnet-0b1cdf95eef16b6cc",
+                    "SECURITY_GROUP": "sg-0507177ae1a0a2796",
+                    "SUBNET_ID": "subnet-0ddd21551c966ef92",
                     "TASK_DEF_NAME": "PEGGHy-Next",
-                    "VPC_ID": "vpc-0b6bc4c43a214f137",
+                    "VPC_ID": "vpc-000d69bd0f58eb02f",
                 },
             },
         }
