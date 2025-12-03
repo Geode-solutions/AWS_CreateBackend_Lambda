@@ -66,46 +66,6 @@ class Config:
                     "VPC_ID": "vpc-0e58c4d6976fb2aac",
                 },
             },
-            "SHARETWIN": {
-                "MASTER": {
-                    "API_URL": "https://api.share-twin.com",
-                    "ASSIGN_PUBLIC_IP": "ENABLED",
-                    "CLUSTER_NAME": "ShareTwin-Master",
-                    "ENVIRONMENT_VARIABLES": {
-                        "name": "geode",
-                        "environment": [{"name": "ID", "value": ID}],
-                    },
-                    "HEALTHCHECK_PORT": 443,
-                    "HEALTHCHECK_ROUTE": f"/{ID}/geode/healthcheck",
-                    "LISTENER_ARN": "arn:aws:elasticloadbalancing:eu-west-3:622060531233:listener/app/Api2GeodeSolutions/fd4af85f9ffc5a54/b559795c939115f4",
-                    "PING_ROUTE": f"/{ID}/geode/ping",
-                    "ORIGINS": "https://share-twin.com",
-                    "SECONDS_BETWEEN_TRIES": 0.25,
-                    "SECURITY_GROUP": "sg-01bcf5f64e3427fd3",
-                    "SUBNET_ID": "subnet-0882d674b17515f6a",
-                    "TASK_DEF_NAME": "ShareTwin-Master",
-                    "VPC_ID": "vpc-0e58c4d6976fb2aac",
-                },
-                "NEXT": {
-                    "API_URL": "https://api.share-twin.com",
-                    "ASSIGN_PUBLIC_IP": "ENABLED",
-                    "CLUSTER_NAME": "ShareTwin-Next",
-                    "ENVIRONMENT_VARIABLES": {
-                        "name": "geode",
-                        "environment": [{"name": "ID", "value": ID}],
-                    },
-                    "HEALTHCHECK_PORT": 443,
-                    "HEALTHCHECK_ROUTE": f"/{ID}/geode/healthcheck",
-                    "LISTENER_ARN": "arn:aws:elasticloadbalancing:eu-west-3:622060531233:listener/app/Api2GeodeSolutions/fd4af85f9ffc5a54/b559795c939115f4",
-                    "PING_ROUTE": f"/{ID}/geode/ping",
-                    "ORIGINS": "https://next.share-twin.com",
-                    "SECONDS_BETWEEN_TRIES": 0.25,
-                    "SECURITY_GROUP": "sg-07787694c5fdf2429",
-                    "SUBNET_ID": "subnet-0882d674b17515f6a",
-                    "TASK_DEF_NAME": "ShareTwin-Next",
-                    "VPC_ID": "vpc-0e58c4d6976fb2aac",
-                },
-            },
             "VEASE": {
                 "MASTER": {
                     "API_URL": "https://api.geode-solutions.com",
@@ -165,6 +125,46 @@ class Config:
                     "VPC_ID": "vpc-0e58c4d6976fb2aac",
                 },
             },
+            "PEGGHY": {
+                "MASTER": {
+                    "API_URL": "https://api_pegghy.geode-solutions.com",
+                    "ASSIGN_PUBLIC_IP": "ENABLED",
+                    "CLUSTER_NAME": "PEGGHy-Master",
+                    "ENVIRONMENT_VARIABLES": {
+                        "name": "geode",
+                        "environment": [{"name": "ID", "value": ID}],
+                    },
+                    "HEALTHCHECK_PORT": 443,
+                    "HEALTHCHECK_ROUTE": f"/{ID}/geode/pegghy_back/healthcheck",
+                    "LISTENER_ARN": "arn:aws:elasticloadbalancing:eu-west-3:622060531233:listener/app/PEGGHy/2bc668aa6572dc0d/11047782bcf22492",
+                    "PING_ROUTE": f"/{ID}/geode/opengeodeweb_back/ping",
+                    "ORIGINS": "https://pegghy.geode-solutions.com",
+                    "SECONDS_BETWEEN_TRIES": 0.25,
+                    "SECURITY_GROUP": "sg-0507177ae1a0a2796",
+                    "SUBNET_ID": "subnet-0ddd21551c966ef92",
+                    "TASK_DEF_NAME": "PEGGHy-Next",
+                    "VPC_ID": "vpc-000d69bd0f58eb02f",
+                },
+                "NEXT": {
+                    "API_URL": "https://api_pegghy.geode-solutions.com",
+                    "ASSIGN_PUBLIC_IP": "ENABLED",
+                    "CLUSTER_NAME": "PEGGHy-Next",
+                    "ENVIRONMENT_VARIABLES": {
+                        "name": "geode",
+                        "environment": [{"name": "ID", "value": ID}],
+                    },
+                    "HEALTHCHECK_PORT": 443,
+                    "HEALTHCHECK_ROUTE": f"/{ID}/geode/pegghy_back/healthcheck",
+                    "LISTENER_ARN": "arn:aws:elasticloadbalancing:eu-west-3:622060531233:listener/app/PEGGHy/2bc668aa6572dc0d/11047782bcf22492",
+                    "PING_ROUTE": f"/{ID}/geode/opengeodeweb_back/ping",
+                    "ORIGINS": "https://next.pegghy.geode-solutions.com",
+                    "SECONDS_BETWEEN_TRIES": 0.25,
+                    "SECURITY_GROUP": "sg-0507177ae1a0a2796",
+                    "SUBNET_ID": "subnet-0ddd21551c966ef92",
+                    "TASK_DEF_NAME": "PEGGHy-Next",
+                    "VPC_ID": "vpc-000d69bd0f58eb02f",
+                },
+            },
         }
 
         if "/website/" in REQUEST_PATH:
@@ -180,14 +180,6 @@ class Config:
                 task = REQUEST_ORIGIN[8:].split("--geode-solutions.netlify.app")[0]
                 CONFIG_DICT[CONFIG_TYPE][CONFIG_ENV]["ORIGINS"] = REQUEST_ORIGIN
                 CONFIG_DICT[CONFIG_TYPE][CONFIG_ENV]["TASK_DEF_NAME"] = task
-        elif "/sharetwin/" in REQUEST_PATH:
-            CONFIG_TYPE = "SHARETWIN"
-            if REQUEST_ORIGIN == "":
-                CONFIG_ENV = "NEXT"
-            elif REQUEST_ORIGIN == CONFIG_DICT[CONFIG_TYPE]["MASTER"]["ORIGINS"]:
-                CONFIG_ENV = "MASTER"
-            elif REQUEST_ORIGIN == CONFIG_DICT[CONFIG_TYPE]["NEXT"]["ORIGINS"]:
-                CONFIG_ENV = "NEXT"
         elif "/vease/" in REQUEST_PATH:
             CONFIG_TYPE = "VEASE"
             if REQUEST_ORIGIN == "":
@@ -201,6 +193,14 @@ class Config:
                 task = REQUEST_ORIGIN[8:].split("--geode-solutions.netlify.app")[0]
                 CONFIG_DICT[CONFIG_TYPE][CONFIG_ENV]["ORIGINS"] = REQUEST_ORIGIN
                 CONFIG_DICT[CONFIG_TYPE][CONFIG_ENV]["TASK_DEF_NAME"] = task
+        elif "/pegghy/" in REQUEST_PATH:
+            CONFIG_TYPE = "PEGGHY"
+            if REQUEST_ORIGIN == "":
+                CONFIG_ENV = "NEXT"
+            elif REQUEST_ORIGIN == CONFIG_DICT[CONFIG_TYPE]["MASTER"]["ORIGINS"]:
+                CONFIG_ENV = "MASTER"
+            elif REQUEST_ORIGIN == CONFIG_DICT[CONFIG_TYPE]["NEXT"]["ORIGINS"]:
+                CONFIG_ENV = "NEXT"
 
         self.API_URL = CONFIG_DICT[CONFIG_TYPE][CONFIG_ENV]["API_URL"]
         self.ASSIGN_PUBLIC_IP = CONFIG_DICT[CONFIG_TYPE][CONFIG_ENV]["ASSIGN_PUBLIC_IP"]
